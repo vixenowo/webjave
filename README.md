@@ -1,2 +1,2 @@
 # webjave
-MacOS Mojave but website
+MacOS Mojave but website - shocker i know
