@@ -14,15 +14,35 @@
 </head>
 <body>
 	<div id="desktop">
-		<div class="window" data-title="First"  icon="finder.png">
-			
+		<div class="thebar">
+			<div class="apple">
+				<img src="apple.png" class="logo">
+			</div>
+		</div>
+		<div class="window closed" data-title="" max="hidden"  icon="warn.png" min="hidden" close="hidden">
+			<img src="warn.png" class="warnico">
+			<h4 class="warntext">Photoshop quit as expected.</h4>
+			<p class="warndesc">Click reopen to open the application again, Click Report<br>to see a more detailed report and send a report to<br>dragonie.fun.</p>
+			<div class="warnbuttons">
+				<button class="warnbuttonsingleleft" href="#">Ignore</button>
+				<button class="warnbuttonsingle" href="#">Report</button>
+				<button class="warnbuttonsingle" href="#">Reopen</button>
+			</div>
+		</div>
+
+		<div class="window" allowresize="yes" data-title="This is a name" insideborders="none"  icon="finder.png">
+			<p>Content</p>
+			<p>You must not have any open windows for production</p>
 		<a href="https://html5-templates.com/" rel="nofollow" target="_blank">&copy; HTML5-Templates.com</a>	
 		</div>
-		
+
 		<div class="bar">		
 			<div id="taskbar">		
-				
-			</div>
+					
+			<div class="bin" title="Trash"><img src="bin.png" id="taskicon" class="taskbarico"></div>
+			<div class="bin" title="Downloads"><img src="folder.png" id="taskicon" class="taskbarico"></div>
+			<div class="hr"></div>
+		</div>
 		</div>
 		
 		<div id="icons">

@@ -29,11 +29,17 @@ function minimizeWindow(id){
 	windowLeftPos[id] = $("#window" + id).css("left");
 	
 	$("#window" + id).animate({
-
 	}, 200, function() {		//animation complete
-		$("#window" + id).addClass('minimizedWindow');
 		$("#minimPanel" + id).addClass('minimizedTab');
+		//$("#window" + id).addClass('moveout');
 		$("#minimPanel" + id).removeClass('activeTab');
+		$("#window" + id).addClass('minimizedWindow');
+		setTimeout(
+			function() 
+			{
+				//$("#window" + id).addClass('minimizedWindow');
+				//$("#window" + id).removeClass('moveout');
+			}, 1000);
 	});	
 }
 
@@ -42,6 +48,9 @@ function openWindow(id) {
 		openMinimized(id);
 	} else {	
 		makeWindowActive(id);
+		
+		$('.taskbarPanel').addClass("bouncy");
+		
 		$("#window" + id).removeClass("closed");
 		$("#minimPanel" + id).removeClass("closed");
 	}
@@ -51,6 +60,7 @@ function openWindow2(id) {
 	setTimeout(function(){
 		if ($('#window' + id).hasClass("minimizedWindow")) {
 			openMinimized(id);
+			$("#window" + id).removeClass('moveout');
 		} else {	
 			makeWindowActive(id);
 			$("#window" + id).removeClass("closed");
@@ -62,6 +72,7 @@ function openWindow2(id) {
 function closeWindwow(id) {
 	$("#window" + id).addClass("closed");
 	$("#minimPanel" + id).addClass("closed");
+	$('.taskbarPanel').removeClass("bouncy");
 }
 
 function openMinimized(id) {
@@ -86,14 +97,19 @@ $(document).ready(function(){
 		$("#taskbar").append('<div style="' + $(this).attr("nobar") + '" class="taskbarPanel" title="'+ $(this).attr("data-title") +'" id="minimPanel' + i + '" data-id="' + i + '"><img src="' + $(this).attr("icon") + '" id="taskicon" class="taskbarico" title="'+ $(this).attr("data-title") +'"></div>');
 		if ($(this).hasClass("closed")) {	$("#minimPanel" + i).addClass('closed');	}		
 		$(this).attr('id', 'window' + (i++));
-		$(this).wrapInner('<div class="wincontent" style="border:' + $(this).attr("insideborders") + ';' + $(this).attr("bgc") + ';"></div>');
-		$(this).prepend('<div class="windowHeader" style="display:' + $(this).attr("hidetopbar") + ';"><strong><img src="' + $(this).attr("icon") + '" title="Content" style="width: 25px; margin: 2px;" float="left"></strong><strong>' + $(this).attr("data-title")  + '</strong><span title="Minimize" style="visibility: ' + $(this).attr("min") + ';" class="winminimize"><span></span></span><span style="visibility: ' + $(this).attr("max") + ';" title="Maximize" class="winmaximize"><span></span><span></span></span><span title="Close" class="winclose">X</div>');
+		$(this).wrapInner('<div class="wincontent" style=""' + $(this).attr("bgc") + ';"></div>');
+		$(this).prepend('<div class="windowHeader" style="display:' + $(this).attr("hidetopbar") + ';"><span title="Close"    style="visibility: ' + $(this).attr("close") + ';" class="winclose">X</span><span title="Minimize" style="visibility: ' + $(this).attr("min") + ';" class="winminimize">—</span><span title="Maximize" style="visibility: ' + $(this).attr("max") + ';" class="winmaximize">	&#x2922;</span></div><strong>' + $(this).attr("data-title")  + '</strong>');
+
+		if ($(this).attr("allowresize")){
+			$(this).find(".wincontent").resizable();	
+		}
+
 	});
 	
 	$("#minimPanel" + (i-1)).addClass('activeTab');
 	$("#window" + (i-1)).addClass('activeWindow');
 	
-	$( ".wincontent" ).resizable();			// resizable
+	
 	$( ".window" ).draggable({ cancel: ".wincontent" });	// draggable
 	
 
@@ -140,6 +156,8 @@ $(document).ready(function(){
 			$(this).parent().parent().children(".wincontent").width(minimizedWidth[$(this).parent().parent().attr("data-id")]);
 		} else {															// maximize
 			$(this).parent().parent().addClass('fullSizeWindow');
+			//$('#desktop').addClass('fullscreenslideout');
+			//$(this).parent().parent().addClass('fullscreen');
 			
 			minimizedHeight[$(this).parent().parent().attr('data-id')] = $(this).parent().parent().children(".wincontent").height();
 			minimizedWidth[$(this).parent().parent().attr('data-id')] = $(this).parent().parent().children(".wincontent").width();

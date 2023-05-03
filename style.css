@@ -15,8 +15,62 @@ table{border-collapse:collapse;border-spacing:0}
 hr{display:block;height:1px;border:0;border-top:1px solid #ccc;margin:1em 0;padding:0}
 input,select{vertical-align:middle}
 
+
+@font-face {
+    font-family: 'SF Pro Display';
+    src: url('font/SFProDisplay-Regular.ttf') format('woff2'),
+        url('font/SFProDisplay-Regular.woff') format('woff'),
+        url('font/SFProDisplay-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.thebar{
+    width: 100%;
+    height: 25px;
+    position: absolute;
+	background: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 0px 5px -1px black;
+    z-index: 99999;
+}
+
+.apple{
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 5px;
+}
+
+.apple:hover{
+    background-color: rgb(45, 107, 223);
+}
+
+.logo{
+    width: 13px;
+    margin: 5px;
+}
+
+button{
+    background-color: #706F72;
+    color: white;
+    width: 110px;
+    padding: 5px;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0px 0px 5px -2px black;
+    cursor: pointer;
+}
+
+h1{
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 #desktop {
-	font-family: Arial, Helvetica, sans-serif;
+    font-family: 'SF Pro Display';
     position: fixed;
     height: 100%;
     width: 100%;
@@ -32,9 +86,11 @@ input,select{vertical-align:middle}
 }
 .window {
     position: absolute;
-    border: 2px solid #000;
-    background: #EEE;
-	border-radius: 5px;
+    box-shadow: 0px 0px 15px -1px black;
+    border: 1px solid #545351;
+    background: #3E3D40;
+    color: white;
+	border-radius: 7px;
 	z-index: 1000;
 }
 .window.closed {
@@ -48,42 +104,66 @@ input,select{vertical-align:middle}
     right: 0 !important;
     left: 0 !important;
     border-radius: 0;
-    bottom: 32px !important;
+    bottom: 0 !important;
 }
+.window.fullSizeWindow .windowHeader {
+    opacity: 0;
+    cursor: auto;
+}
+.window.fullSizeWindow .windowHeader:hover {
+    opacity: 1;
+}
+.window.fullSizeWindow .windowHeader:hover + strong {
+    opacity: 1;
+}
+.window.fullSizeWindow .windowHeader + strong {
+    opacity: 0;
+}
+
 .fullSizeWindow .ui-resizable-handle {
 	display: none;
 }
 .windowHeader {
-    background-color: #b7b7e0;
-    text-align: right;
-    border-bottom: 2px solid #000;
-    padding: 2px;
+    background-image: linear-gradient(to bottom, #333231 , #292827);
+    border-bottom: 1px solid #000;
+	border-radius: 5px 5px 0px 0px;
+    padding: 3px;
     cursor: move;
     height: 28px;
 }
 .activeWindow .windowHeader {
-    background-color: #8888d6;
+    background-image: linear-gradient(to bottom, #41403E , #363533);
 }
 .windowHeader > span {
     display: inline-block;
     cursor: pointer;
-    border: 2px solid #000;
     margin-left: 4px;
-    font-size: 19px;
-    padding: 2px 10px;
+    padding: 1px;
+    font-size: 7px;
+    margin-top: 4px;
     font-family: "Arial Black", Gadget, sans-serif;
-    border-radius: 5px;
-    line-height: 20px;
-    width: 12px;
-    height: 20px;
+    border-radius: 100%;
+    line-height: 10px;
+    padding-left: 3px;
+    width: 8px;
+    height: 10px;
     position: relative;
     overflow: hidden;
+    text-transform: uppercase;
 }
-.windowHeader > span:hover {
-	background: rgba(255,255,255,0.3);
+
+.windowHeader:hover > span{
+    color: black;
 }
+
 .windowHeader > span.winclose:hover {
-	background: #f15454;
+	background: red;
+}
+.windowHeader > span.winminimize:hover {
+	background: yellow;
+}
+.windowHeader > span.winmaximize:hover {
+	background: rgb(0, 218, 0);
 }
 .windowHeader > span > span {
     display: inline-block;
@@ -93,16 +173,25 @@ input,select{vertical-align:middle}
     top: 6px;
     left: 10px;
 }
+
+.winminimize{
+    background-color: #E7C351;
+    color: #E7C351;
+}
+.winmaximize{
+    background-color: #74BD47;
+    color: #74BD47;
+}
+.winclose{
+    background-color: #EF665E;
+    color: #EF665E;
+}
+
+
 .winminimize > span {
 	border-bottom: 3px solid #000;
 }
-.winmaximize > span {
-	border: 2px solid #000;
-	border-top: 3px solid #000;
-}
-.winmaximize > span:nth-child(2) {
-	display: none;
-}
+
 .fullSizeWindow .winmaximize > span:nth-child(1) {
 	margin: 2px 0 0 -4px;
 }
@@ -115,35 +204,63 @@ input,select{vertical-align:middle}
     padding: 10px;
     min-width: 200px;
     min-height: 140px;
-    border: 2px solid #000;
     margin: 2px;
 	border-radius: 0 0 5px 5px;
 }
-.windowHeader > strong {
-    float: left;
-    margin: 0px 3px 0 10px;
+.windowHeader + strong {
+    width: 100%;
+    position: absolute;
+    margin-top: -33px;
+    text-align: center;
     line-height: 29px;
     font-size: 17px;
+    cursor: move;
+    pointer-events: none;
+    color: white;
+    font-weight: normal;
 }
 .taskbarPanel {
     display: inline-block;
-    margin: 2px 0 0 10px;
-    height: 70px;
-    width: 70px;
+    margin: 7px 0px 0px 10px;
+    height: 60px;
+    width: 60px;
+    object-fit: cover;
     font-weight: bold;
 	cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: center;
 }
-.taskbarPanel.activeTab::before {
+
+
+
+
+.bin{
+    margin: 7px 0px 0px 10px;
+    height: 60px;
+    width: 60px;
+    font-weight: bold;
+	cursor: pointer;
+    text-align: center;
+    float: right;
+    pointer-events: none;
+}
+
+.hr{
+    height: 80px;
+    margin: 0px 10px 0px 30px;
+    width: 1px;
+    background-color: gray;
+    float: right;
+}
+
+.taskbarPanel::before {
     content: "";
     width: 10px;
     height: 10px;
     position: absolute;
     border-radius: 100%;
-	background: white;
-    margin-top: 80px;
+	background: rgba(255, 255, 255, 0.705);
+    margin-top: 70px;
+    margin-left: 25px;
 }
 
 .taskbarPanel:hover::after{
@@ -154,18 +271,21 @@ input,select{vertical-align:middle}
     font-size: 14px;
     text-align: center;
     border-radius: 5px;
-    width: 100px;
-    height: 40px;
+    height: 25px;
     padding: 5px;
     line-height: 10px;
-    margin-bottom: 170px;
+    margin-top: -120px;
+    width: 100px;
+    margin-left: -20px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    animation: fadein 0.2s forwards;
-    animation-delay: 0.5s;
+    font-weight: normal;
+    font-style: normal;
+    animation: fadein 0s forwards;
+    /*animation-delay: 0.05s;*/
   }
 
   @keyframes fadein {
@@ -177,13 +297,28 @@ input,select{vertical-align:middle}
     }
   }
 
+  .bouncy{
+    animation: bouncy 1s forwards ease-in-out;
+  }
+  
+  @keyframes bouncy {
+    from{
+        transform: translateY(0);
+    }
+    50%{
+        transform: translateY(-50px);
+    }
+    from{
+        transform: translateY(0);
+    }
+  }
 
-.taskbarPanel.minimizedTab {
+/*.taskbarPanel.minimizedTab {
 	background: #AAA;	
 }
 .taskbarPanel.minimizedTab:hover {
 	background: #DDD;
-}
+}*/
 .taskbarPanel.closed {
 	display: none;
 }
@@ -197,21 +332,29 @@ input,select{vertical-align:middle}
     align-items: center;
     justify-content: center;
 }
+
 #taskbar {
 	height: 60px;
 	bottom: 0;
 	left: 0;
 	right: 0;
 	background: rgba(0, 0, 0, 0.5);
-    border-radius: 20px 20px 0px 0px;
+    border-radius: 10px 10px 0px 0px;
     padding: 20px;
     padding-top: 10px;
     padding-left: 10px;
     padding-bottom: 40px;
+    z-index: 9999999;
 }
+
 .taskbarico{
     width: 100%;
+    height: 60px;
+    object-fit: contain;
+    pointer-events: none;
 }
+
+
 #icons {
 	position: absolute;
 	z-index: 10;
@@ -237,6 +380,79 @@ input,select{vertical-align:middle}
     color: #30478c;
 }
 
+.warnico{
+    width: 95px;
+    float: left;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+h4{
+    font-weight: 600;
+    color: rgb(223, 223, 223);
+}
+
+.warntext{
+    margin-top: 10px;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.warndesc{
+    color: rgb(197, 197, 197);
+    font-size: 15px;
+}
+
+.warnbuttons{
+    margin-right: 10px;
+    width: 365px;
+    float: right;
+}
+
+.warnbuttonsingle{
+    margin-left: 10px;
+    float: right;
+}
+
+.warnbuttonsingleleft{
+    float: left;
+}
+
+.moveout{
+    animation: moveout 1s forwards;
+}
+
+@keyframes moveout {
+    to{
+        transform: translateY(100vh) scale(0.1) scaleX(0.2);
+        transform-origin: 40px 0px;
+        overflow: hidden;
+    }
+}
+
+
+
+.fullscreen{
+    animation: fullscreen 1s forwards;
+}
+
+@keyframes fullscreen {
+    to{
+
+    }
+}
+
+.fullscreenslideout{
+    animation: fullscreenslideout 1s forwards;
+}
+
+@keyframes fullscreenslideout {
+    to{
+
+    }
+}
 /*Demo styles BEGIN*/
-#window0 {	top: 20px;	left: 40px;}
-#window0 .wincontent {	width: 260px; height: 100px;	}
+#window0 {	top: 20px;	left: 200px;}
+#window1 {	top: 60px;	left: 240px;}
+#window0 .wincontent {	width: 500px; height: 100px;	}
+#window1 .wincontent {	width: 460px; height: 100px;  min-width: 450px; min-height: 100px;	}
