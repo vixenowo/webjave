@@ -37,9 +37,6 @@ input,select{vertical-align:middle}
     font-size: 14px;
 }
 
-a{
-    color: rgb(92, 92, 143);
-}
 
 .apple{
     width: 40px;
@@ -114,6 +111,7 @@ h3{
     padding: 12px;
     width: 150px;
     padding-bottom: 14px;
+    color: white;
 }
 
 
@@ -328,7 +326,6 @@ h1{
 	cursor: pointer;
     text-align: center;
     float: right;
-    pointer-events: none;
 }
 
 .hr{
@@ -542,5 +539,11 @@ h4{
 #window0 {	top: 20px;	left: 200px;}
 #window1 {	top: 60px;	left: 240px;}
 #window2 {	top: 460px;	left: 210px;}
-#window0 .wincontent {	width: 500px; height: 100px;	}
+#window3 {	top: 160px;	left: 110px;}
+
+
+    /* YOU ONLY NEED TO INCLUDE MIN WITH APPLICATIONS THAT ALLOW SCALE AND FULL SCREEN */
+#window0 .wincontent {	width: 500px; height: 100px; }
 #window1 .wincontent {	width: 460px; height: 300px;  min-width: 460px; min-height: 300px;	}
+#window2 .wincontent {	width: 150px; height: 100px;  min-width: 150px; min-height: 100px;}
+#window3 .wincontent {	width: 500px; height: 300px; }

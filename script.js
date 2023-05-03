@@ -21,14 +21,28 @@ function makeWindowActive(thisid) {
 		$("#programname").text($("#window" + thisid).attr("data-title"));
 		//$("#programname").text("Warning");
 		//$("#barslot1").css("display", "none");
+		$("#finder").css("display", "none");
 		$("#barslot1").text("Waht");
-		$("#barslot2").css("display", "none");
-		$("#barslot3").css("display", "none");
-		$("#barslot4").css("display", "none");
-		$("#barslot5").css("display", "none");
-		$("#barslot6").css("display", "none");
+		$("#barslot2").css("visibility", "hidden");
+		$("#barslot3").css("visibility", "hidden");
+		$("#barslot4").css("visibility", "hidden");
+		$("#barslot5").css("visibility", "hidden");
+		$("#barslot6").css("visibility", "hidden");
 	} else {
 		$("#programname").text($("#window" + thisid).attr("data-title"));
+		$("#finder").css("display", "block");
+		$("#barslot1").text("File");
+		$("#barslot2").text("Edit");
+		$("#barslot3").text("View");
+		$("#barslot4").text("Go");
+		$("#barslot5").text("Window");
+		$("#barslot6").text("Help");
+		$("#barslot1").css("visibility", "visible");
+		$("#barslot2").css("visibility", "visible");
+		$("#barslot3").css("visibility", "visible");
+		$("#barslot4").css("visibility", "visible");
+		$("#barslot5").css("visibility", "visible");
+		$("#barslot6").css("visibility", "visible");
 	}
 
 
@@ -90,6 +104,7 @@ function closeWindwow(id) {
 	$("#window" + id).addClass("closed");
 	$("#minimPanel" + id).addClass("closed");
 	$('.taskbarPanel').removeClass("bouncy");
+	$("#programname").text("Finder");
 }
 
 function openMinimized(id) {
