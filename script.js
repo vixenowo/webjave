@@ -88,7 +88,7 @@ function openWindow(id) {
 	} else {	
 		makeWindowActive(id);
 		
-		$('.taskbarPanel').addClass("bouncy");
+		$("#minimPanel" + id).addClass("bouncy");
 		
 		$("#window" + id).removeClass("closed");
 		$("#minimPanel" + id).removeClass("closed");
