@@ -13,14 +13,22 @@
 	<title>MacOS Webjave</title>
 </head>
 <body>
+
+	<div id="context-menu">
+		<a><div class="item" id="rightclick1">New folder</div></a>
+		<a><div class="item" id="rightclick2">Open</div></a>
+	  </div>
+
 	<div id="desktop">
+
 		<div class="thebar">
 			<div class="apple" id="barslot-1">
 				<img src="apple.png" class="logo">
 			</div>
 
 			<div class="dropdown" id="appledropdown">
-				<a class="openWindow" data-id="3"><li>About this Mac</li></a>
+				<a class="openWindow3" data-id="3"><li>About this Mac</li></a>
+				<a class="openWindow3" data-id="3"><li  class="licont">macinfo</li></a>
 			</div>
 
 			<div class="baropts" id="barslot0">
@@ -50,7 +58,26 @@
 			<div class="baropts" id="barslot6">
 				Help
 			</div>
+
+			
+			<div class="baroptsright" id="noticenter">
+				<img src="notificationcenter.png" class="righticos">
+			</div>
+			<div class="baroptsright" id="search">
+				<img src="search.png" class="righticos">
+			</div>
+			<div class="baroptsright" id="siri">
+				<img src="siri.png" class="righticos">
+			</div>
+			<div class="baroptsright2" id="dateandtime">
+				<span id="time">UNKNOWN D+T</span>
+			</div>
+			<div class="baroptsright" id="wifi">
+				<img src="wifi.png" class="righticos">
+			</div>
 		</div>
+
+
 		<div class="window closed" hidetitle="none" data-title="Error" max="hidden"  icon="warn.png" min="hidden" close="hidden">
 			<img src="warn.png" class="warnico">
 			<h4 class="warntext">Photoshop quit as expected.</h4>
@@ -72,19 +99,49 @@
 				- Full screen isnt 100% accurate but does the job i guess<br>
 				- removed traffic light options are gone instead of gray (might not fix)<br>
 				- Finish taskbar!!<br>
+				- right click changes when program switches (fixing never)<br>
+				- no application options right click (fixing never)<br>
 				- vix: make sure to keep all programs closed on launch cause of bounce bug<br>
 			</p>
 			<br><p>ACKNOWLEDGEMENTS</p>
-		<a href="https://html5-templates.com/" rel="nofollow" target="_blank">Windows framework</a>	
+			<p>JQUERY UI</p>
+
 		</div>
 		
 		<div class="window closed" allowresize="yes" data-title="title1" insideborders="none"  icon="coneskin.png">
 			<p>oh sa sa le le</p>
+			<a class="slice"><li class="licont">Slice</li></a>
 		</div>
 
-		<div class="window" hidetitle="none"  max="hidden" data-title="About this Mac" insideborders="none"  icon="finder.png">
-			This is not a mac.
+		<div class="window closed" hidetitle="none"  max="hidden" data-title="About this Mac" insideborders="none"  icon="finder.png">
+			<img src="mojave.png" class="webjave">
+			<div class="aboutus">
+				<h1><span style="font-weight: bold;">macOS </span>Webjave</h1>
+				<p style="font-size: 12px;">
+					Version 10.14 (2048)
+				</p>
+				<br>
+				<p style="font-size: 13px;">
+					ModBook Pro
+				</p>
+				<p style="font-size: 13px; margin-top: -3px;">
+					Processor <span style="margin-left: 10px">Intel Core 2 Duo E5800</span>
+				</p>
+				<p style="font-size: 13px; margin-top: -5px;">
+					Memory <span style="margin-left: 10px">4GB DDR2</span>
+				</p>
+				<p style="font-size: 13px; margin-top: -5px;">
+					Startup Disk <span style="margin-left: 10px">dragonie.fun</span>
+				</p>
+				<p style="font-size: 13px; margin-top: -5px;">
+					Graphics <span style="margin-left: 10px">SILLY Ultra 1080 4GB</span>
+				</p>
+				<button class="aboutbutton" href="#">Software Report...</button>
+				<button class="aboutbutton" href="#">Software Update...</button>
+			</div>
+			<p class="copyright">© <span id="year"></span> dragonie.fun - <a style="color: white;" href="https://html5-templates.com/" rel="nofollow" target="_blank">Window framework</a> used with credit permission</p>
 		</div>
+		<script>document.getElementById("year").innerHTML = new Date().getFullYear();</script>
 
 		<div class="bar">		
 			<div id="taskbar">		
@@ -97,11 +154,63 @@
 		</div>
 		
 		<div id="icons">
-			<a class="openWindow" data-id="0">error</a>
-			<a class="openWindow" data-id="1">finder</a>
-			<a class="openWindow" data-id="2">title1</a>
+			<a class="openWindow" data-id="0">
+				<img src="finder.png" class="appicons">
+				<p>stonecut</p>
+			</a>
+			<a class="openWindow" data-id="1">
+				<img src="flushed.png" class="appicons">
+				<p>known bugs</p></a>
+			<a class="openWindow" data-id="2">
+				<img src="coneskin.png" class="appicons">
+				<p>title1</p></a>
 		</div>
-		<!-- You can use this template freely if you leave a visible link to HTML5-Templates.com -->
+		
+
+		
+		<script>
+			const timeSpan = document.getElementById('time');
+			
+			function updateTime() {
+			  const now = new Date();
+			
+			  const hours = now.getHours() % 12 || 12; // Convert to 12-hour format
+			  const minutes = now.getMinutes().toString().padStart(2, '0'); // Add leading zero if needed
+			  const ampm = now.getHours() >= 12 ? ' PM' : ' AM'; // Determine AM/PM
+			  const dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][now.getDay()]; // Get day of week
+			
+			  timeSpan.textContent = `${dayOfWeek} ${hours}:${minutes}${ampm}`;
+			}
+			
+			// Update the time when the page first loads
+			updateTime();
+			
+			// Update the time every second
+			setInterval(updateTime, 1000); // Run every second
+
+    		const contextMenu = document.getElementById("context-menu");
+			const scope = document.getElementById("desktop");
+
+			scope.addEventListener("contextmenu", (event) => {
+  			event.preventDefault();
+
+  			const { clientX: mouseX, clientY: mouseY } = event;
+
+  			contextMenu.style.top = `${mouseY}px`;
+  			contextMenu.style.left = `${mouseX}px`;
+
+  			contextMenu.classList.add("visible");
+
+			  scope.addEventListener("click", (e) => {
+ 			 if (e.target.offsetParent != contextMenu) {
+  			  contextMenu.classList.remove("visible");
+ 			 }
+			});
+			});
+
+
+			
+		</script>
 	</div>
 </body>
 

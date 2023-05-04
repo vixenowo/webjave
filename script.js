@@ -23,20 +23,28 @@ function makeWindowActive(thisid) {
 		//$("#barslot1").css("display", "none");
 		$("#finder").css("display", "none");
 		$("#barslot1").text("Waht");
+		$("#barslot-1").css("visibility", "visible"); // always aooke
+		$("#barslot0").css("visibility", "visible"); // app name
 		$("#barslot2").css("visibility", "hidden");
 		$("#barslot3").css("visibility", "hidden");
 		$("#barslot4").css("visibility", "hidden");
 		$("#barslot5").css("visibility", "hidden");
 		$("#barslot6").css("visibility", "hidden");
+		$("#rightclick1").css("display", "block");
+		$("#rightclick2").css("display", "none");
 	} else {
 		$("#programname").text($("#window" + thisid).attr("data-title"));
 		$("#finder").css("display", "block");
+		$("#rightclick1").css("display", "none");
+		$("#rightclick2").css("display", "block");
 		$("#barslot1").text("File");
 		$("#barslot2").text("Edit");
 		$("#barslot3").text("View");
 		$("#barslot4").text("Go");
 		$("#barslot5").text("Window");
 		$("#barslot6").text("Help");
+		$("#barslot-1").css("visibility", "visible");
+		$("#barslot0").css("visibility", "visible");
 		$("#barslot1").css("visibility", "visible");
 		$("#barslot2").css("visibility", "visible");
 		$("#barslot3").css("visibility", "visible");
@@ -145,6 +153,14 @@ $(document).ready(function(){
 	
 	
 	$( ".window" ).draggable({ cancel: ".wincontent" });	// draggable
+	$("a", "#icons").draggable({
+		drag: function( event, ui ) {
+			$("img", "#icons").removeClass('clickedicon');
+			$("p", "#icons").removeClass('clickediconp');
+			$("img", this).addClass('clickedicon');
+			$("p", this).addClass('clickediconp');
+		}
+	   });
 	
 
     $(".window").mousedown(function(){		// active window on top (z-index 1000)
@@ -172,13 +188,45 @@ $(document).ready(function(){
 		}
     });	
 	
-    $(".openWindow").click(function(){		// open closed window
+    $(".openWindow").dblclick(function(){		// open closed window
 		openWindow($(this).attr("data-id"));
+		$("img", this).removeClass('clickedicon');
+		$("p", this).removeClass('clickediconp');
     });
+
+    $(".openWindow").click(function(){		// open closed window
+		$("img", "#icons").removeClass('clickedicon');
+		$("p", "#icons").removeClass('clickediconp');
+		$("img", this).addClass('clickedicon');
+		$("p", this).addClass('clickediconp');
+    });
+
+
+    $(".slice").click(function(){		// resets all icons to grid
+		$("img", "#icons").removeClass('clickedicon');
+		$("p", "#icons").removeClass('clickediconp');
+		
+		$("a", "#icons").draggable({
+			revert : function(event, ui) {
+				$("a", "#icons").data("uiDraggable").originalPosition = {
+					top : 0,
+					left : 0
+				};
+				return !event;
+			}
+		});
+		$("#droppable").droppable();
+    });
+
+	
 
 
     $(".openWindow2").click(function(){		// open closed window
 			openWindow2($(this).attr("data-id"));
+    });
+
+    $(".openWindow3").click(function(){		// open closed window
+			openWindow($(this).attr("data-id"));
     });
 
 	
@@ -202,4 +250,3 @@ $(document).ready(function(){
     });		
 	adjustFullScreenSize();	
 });
-
