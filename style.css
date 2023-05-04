@@ -709,12 +709,14 @@ h4{
 }
 
 
-
+#rightclick2{
+    display: none;
+}
 
 
 
 /*Demo styles BEGIN*/
-#window0 {	top: 20px;	left: 200px;}
+#window0 {	top: 60px;	left: 60px;}
 #window1 {	top: 60px;	left: 240px;}
 #window2 {	top: 460px;	left: 210px;}
 #window3 {	top: 160px;	left: 110px;}

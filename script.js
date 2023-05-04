@@ -17,12 +17,12 @@ function makeWindowActive(thisid) {
 	});
 
 
-	if ($("#window" + thisid).attr("data-title") == "Error"){
+	if ($("#window" + thisid).attr("data-title") == "System Preferences"){
 		$("#programname").text($("#window" + thisid).attr("data-title"));
 		//$("#programname").text("Warning");
 		//$("#barslot1").css("display", "none");
-		$("#finder").css("display", "none");
-		$("#barslot1").text("Waht");
+		//$("#finder").css("display", "none");
+		$("#barslot1").text("sample test");
 		$("#barslot-1").css("visibility", "visible"); // always aooke
 		$("#barslot0").css("visibility", "visible"); // app name
 		$("#barslot2").css("visibility", "hidden");
@@ -30,13 +30,13 @@ function makeWindowActive(thisid) {
 		$("#barslot4").css("visibility", "hidden");
 		$("#barslot5").css("visibility", "hidden");
 		$("#barslot6").css("visibility", "hidden");
-		$("#rightclick1").css("display", "block");
-		$("#rightclick2").css("display", "none");
+		//$("#rightclick1").css("display", "block");
+		//$("#rightclick2").css("display", "none");
 	} else {
 		$("#programname").text($("#window" + thisid).attr("data-title"));
 		$("#finder").css("display", "block");
-		$("#rightclick1").css("display", "none");
-		$("#rightclick2").css("display", "block");
+		//$("#rightclick1").css("display", "none");
+		//$("#rightclick2").css("display", "block");
 		$("#barslot1").text("File");
 		$("#barslot2").text("Edit");
 		$("#barslot3").text("View");
@@ -108,11 +108,37 @@ function openWindow2(id) {
 	}, 6000);
 }
 
+
+
+
 function closeWindwow(id) {
-	$("#window" + id).addClass("closed");
-	$("#minimPanel" + id).addClass("closed");
+
+	//if ($("#window" + id).attr("data-title") == "System Preferences"){
+	//	$("#window" + id).addClass("closed");
+	//} else {
+		$("#window" + id).addClass("closed");
+		$("#minimPanel" + id).addClass("closed");
+	//}
+
 	$('.taskbarPanel').removeClass("bouncy");
 	$("#programname").text("Finder");
+	$("#finder").css("display", "block");
+	//$("#rightclick1").css("display", "none");
+	//$("#rightclick2").css("display", "block");
+	$("#barslot1").text("File");
+	$("#barslot2").text("Edit");
+	$("#barslot3").text("View");
+	$("#barslot4").text("Go");
+	$("#barslot5").text("Window");
+	$("#barslot6").text("Help");
+	$("#barslot-1").css("visibility", "visible");
+	$("#barslot0").css("visibility", "visible");
+	$("#barslot1").css("visibility", "visible");
+	$("#barslot2").css("visibility", "visible");
+	$("#barslot3").css("visibility", "visible");
+	$("#barslot4").css("visibility", "visible");
+	$("#barslot5").css("visibility", "visible");
+	$("#barslot6").css("visibility", "visible");
 }
 
 function openMinimized(id) {
@@ -226,7 +252,7 @@ $(document).ready(function(){
     });
 
     $(".openWindow3").click(function(){		// open closed window
-			openWindow($(this).attr("data-id"));
+		openWindow($(this).attr("data-id"));
     });
 
 	

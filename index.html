@@ -8,6 +8,19 @@
 	<link rel="canonical" href="https://html5-templates.com/" />
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+	<link rel="icon" type="image/x-icon" href="mojave.png">
+	<meta name='keywords' content='mojave website, webjave'>
+	<meta name='subject' content='macOS Webjave - dragonie.fun'>
+	<meta name='description' content='macOS Mojave recreation website'>
+	<meta property="og:url" content="https://dragonie.fun/webjave/" />
+	<meta property="og:image" content="https://dragonie.fun/webjave/mojave.png" />
+	<meta name="theme-color" content="#8A2BE2">
+	<meta name="twitter:title" content="macOS Webjave - dragonie.fun">
+	<meta name="twitter:description" content="macOS Mojave recreation website">
+	<meta name="twitter:image" content="https://dragonie.fun/webjave/mojave.png">
+	<meta name="twitter:card" content="summary_large_image">
+
 	<script src="script.js"></script>	
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<title>MacOS Webjave</title>
@@ -15,8 +28,8 @@
 <body>
 
 	<div id="context-menu">
-		<a><div class="item" id="rightclick1">New folder</div></a>
-		<a><div class="item" id="rightclick2">Open</div></a>
+		<a class="openWindow3" data-id="0"><div class="item" id="rightclick1">Settings</div></a>
+		<a class="openWindow3" data-id="2"><div class="item" id="rightclick2">About this Mac</div></a>
 	  </div>
 
 	<div id="desktop">
@@ -78,14 +91,13 @@
 		</div>
 
 
-		<div class="window closed" hidetitle="none" data-title="Error" max="hidden"  icon="warn.png" min="hidden" close="hidden">
-			<img src="warn.png" class="warnico">
-			<h4 class="warntext">Photoshop quit as expected.</h4>
-			<p class="warndesc">Click reopen to open the application again, Click Report<br>to see a more detailed report and send a report to<br>dragonie.fun.</p>
+		<div class="window " data-title="System Preferences" max="hidden"  icon="settings.png" >
+			<img src="settings.png" class="warnico">
+			<h4 class="warntext">change to system settings</h4>
+			<p class="warndesc">application</p>
 			<div class="warnbuttons">
-				<button class="warnbuttonsingleleft" href="#">Ignore</button>
-				<button class="warnbuttonsingle" href="#">Report</button>
-				<button class="warnbuttonsingle" href="#">Reopen</button>
+				<button class="warnbuttonsingleleft" href="#">Yeah</button>
+				<button class="warnbuttonsingle" href="#">Got it</button>
 			</div>
 		</div>
 
@@ -143,6 +155,18 @@
 		</div>
 		<script>document.getElementById("year").innerHTML = new Date().getFullYear();</script>
 
+
+		<div class="window closed" hidetitle="none" data-title="Application Info" max="hidden"  icon="settings.png" >
+			<img src="settings.png" class="warnico">
+			<h4 class="warntext">application</h4>
+			<p class="warndesc">application</p>
+			<div class="warnbuttons">
+				<button class="warnbuttonsingleleft" href="#">Yeah</button>
+				<button class="warnbuttonsingle" href="#">Got it</button>
+			</div>
+		</div>
+
+
 		<div class="bar">		
 			<div id="taskbar">		
 					
@@ -154,10 +178,6 @@
 		</div>
 		
 		<div id="icons">
-			<a class="openWindow" data-id="0">
-				<img src="finder.png" class="appicons">
-				<p>stonecut</p>
-			</a>
 			<a class="openWindow" data-id="1">
 				<img src="flushed.png" class="appicons">
 				<p>known bugs</p></a>
